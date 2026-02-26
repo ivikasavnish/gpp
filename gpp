@@ -1,0 +1,15 @@
+#!/bin/bash
+# gpp — Go Plus Plus: custom Go compiler with decorator syntax support
+# Usage: gpp run file.go | gpp build file.go | gpp version
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GOROOT="$SCRIPT_DIR/compiler"
+
+if [ ! -f "$GOROOT/bin/go" ]; then
+  echo "error: compiler not found at $GOROOT/bin/go"
+  echo "Run ./install.sh to download the compiler."
+  exit 1
+fi
+
+export GOROOT
+exec "$GOROOT/bin/go" "$@"
